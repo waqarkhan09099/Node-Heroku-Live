@@ -1,4 +1,5 @@
 const express= require('express')
+const students=require('./student')
 const app=express()
 const port= process.env.PORT|| 4000
 const path=require("path");
