@@ -60,16 +60,18 @@ app.put('/api/student/:id',(req,res)=>{
 
 app.delete('/api/student/:id',(req,res)=>{
     let id =req.params.id
-    let first_name=req.body.first_name
-    let last_name=req.body.last_name
-    let email=req.body.email
-
+    
     let index=students.findIndex(student=>{
         return (student.id=== Number.parseInt(id))
     })
-    let std=students[index]    
-    std.splice(0,std.length)
-    res.json(std)
+    if(index>=0){
+        let std=students[index]    
+        students.splice(index,1)
+        res.json(std)
+    }else{
+        res.status(404)
+        res.send("params id is not found")
+    }
 })
 
 app.get('/api/student',(req,res)=>{
@@ -77,6 +79,11 @@ app.get('/api/student',(req,res)=>{
     
 })
 
+app.get('/api/student/:id',(req,res)=>{
+    let id=Number(req.params.id)-1
+    res.json(students[id])
+    
+})
 
 
 
