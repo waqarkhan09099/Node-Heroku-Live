@@ -1,5 +1,6 @@
 const express= require('express')
 const students=require('./student')
+var cors = require('cors')
 const app=express()
 const port= process.env.PORT|| 4000
 const path=require("path");
@@ -11,6 +12,7 @@ app.use('/',(req,res,next)=>{
     console.log(req.body)
     next()
 })
+app.use(cors())
 
 app.get('/',(req,res)=>{
     res.send("Hello World !!! Muhammad Waqar Khan Server File")
@@ -22,8 +24,8 @@ app.get('/name',(req,res)=>{
 })
 
 app.post('/api/student',(req,res)=>{
-    if(!req.body.email){
-        req.send("Email are not Found")
+    if(!req.body.email||!req.body.first_name||!req.body.last_name){
+        req.send("Invalid Data Post")
         return req.staus(400)
     }
     const newUser={
