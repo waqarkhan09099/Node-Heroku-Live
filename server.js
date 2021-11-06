@@ -29,7 +29,7 @@ app.post('/api/student',(req,res)=>{
         return req.staus(400)
     }
     const newUser={
-        id:students.length+1,
+        id:res.id===req.body.id?(students.length+1):(students.length+1),
         first_name:req.body.first_name,
         last_name:req.body.last_name,
         email:req.body.email,
